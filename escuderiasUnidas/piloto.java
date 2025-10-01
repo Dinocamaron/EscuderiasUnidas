@@ -1,4 +1,4 @@
 package escuderiasUnidas;
 
-public class piloto extends persona{
+public class piloto extends Persona{
 }
