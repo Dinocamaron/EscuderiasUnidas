@@ -4,11 +4,13 @@ public class Persona {
     private String dni;
     private String nombre;
     private String apellido;
+    private Pais pais;
 
-    public Persona (String dni, String nombre, String apellido){
+    public Persona (String dni, String nombre, String apellido ){
         this.dni= dni;
         this.nombre=apellido;
         this.apellido= apellido;
+
 
     }
 
