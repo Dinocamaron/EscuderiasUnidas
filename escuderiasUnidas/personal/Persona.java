@@ -1,4 +1,4 @@
-package escuderiasUnidas;
+package escuderiasUnidas.personal;
 
 public class Persona {
     private String dni;
@@ -10,8 +10,6 @@ public class Persona {
         this.dni= dni;
         this.nombre=apellido;
         this.apellido= apellido;
-
-
     }
 
     public Persona (){

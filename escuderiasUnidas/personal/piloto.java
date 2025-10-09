@@ -1,4 +1,4 @@
-package escuderiasUnidas;
+package escuderiasUnidas.personal;
 
 public class piloto extends Persona{
 

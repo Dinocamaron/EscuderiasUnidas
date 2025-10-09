@@ -1,4 +1,4 @@
-package escuderiasUnidas;
+package escuderiasUnidas.personal;
 
 public class mecanico extends Persona{
 
@@ -11,4 +11,5 @@ public class mecanico extends Persona{
         this.especialidad=especialidad;
         this.añosExperiencia=añosExperiencia;
     }
+
 }

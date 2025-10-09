@@ -1,4 +1,4 @@
-package escuderiasUnidas;
+package escuderiasUnidas.personal;
 
 public class Pais {
     private int idPais;
@@ -21,5 +21,11 @@ public class Pais {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getIdPais(){return idPais;}
+
+    public String getDescripcion() {
+        return descripcion;
     }
 }
