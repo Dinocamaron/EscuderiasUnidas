@@ -21,10 +21,11 @@ public class Piloto extends Persona{
         this.pilotosAutos = new ArrayList<AutoPiloto>();
     }
 
-//constructor con el atributo PilotoEscuderia
-    public Piloto (String dni, String nombre, String apellido,int numeroCompetencia, int victorias, int polePosition,
+/*Constructor con el atributo PilotoEscuderia
+ **/
+    public Piloto (String dni, String nombre, String apellido,Pais pais, int numeroCompetencia, int victorias, int polePosition,
                    int vueltasRapidas, int podio, List<PilotoEscuderia>pilotosEscuderias, List<AutoPiloto>pilotosAutos){
-        super(dni, nombre, apellido);
+        super(dni, nombre, apellido, pais);
         this.numeroCompetencia= numeroCompetencia;
         this.victorias=victorias;
         this.polePosition=polePosition;
@@ -33,7 +34,7 @@ public class Piloto extends Persona{
         this.pilotosEscuderias = pilotosEscuderias;
         this.pilotosAutos = pilotosAutos;
     }
-    //metodo y setter de AutoPiloto
+    /*metodo y setter de AutoPiloto**/
     public void agregarPilotosA(AutoPiloto a){
         this.pilotosAutos.add(a);
     }
@@ -41,7 +42,7 @@ public class Piloto extends Persona{
         this.pilotosAutos = pilotosAutos;
     }
 
-    //metodo y setter de PilotoEscuderia
+    /*metodo y setter de PilotoEscuderia**/
     public void agregarPilotoEsc(PilotoEscuderia p){
         this.pilotosEscuderias.add(p);
     }

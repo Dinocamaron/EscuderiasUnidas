@@ -1,6 +1,7 @@
 package escuderiasUnidas.carreras;
 
 import escuderiasUnidas.PilotoEscuderia;
+import escuderiasUnidas.personal.Mecanico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,20 +9,26 @@ import java.util.List;
 public class Escuderia {
     private String nombre;
     private List<PilotoEscuderia> pilotosEscuderias;
+    private List<Mecanico>mecanicos;
 
     public Escuderia(){
         this.pilotosEscuderias = new ArrayList<PilotoEscuderia>();
+        this.mecanicos= new ArrayList<Mecanico>();
     }
 
     public Escuderia(String nombre){
         this.nombre=nombre;
         this.pilotosEscuderias = new ArrayList<PilotoEscuderia>();
     }
-    public Escuderia(String nombre,List<PilotoEscuderia> pilotosEscuderias){
+    public Escuderia(String nombre,List<PilotoEscuderia> pilotosEscuderias,List<Mecanico>mecanicos){
         this.nombre=nombre;
         this.pilotosEscuderias = pilotosEscuderias;
+        this.mecanicos= mecanicos;
     }
 
+    public void agregarMecanico(Mecanico m){
+        this.mecanicos.add(m);
+    }
     public void agregarPilotoEsc(PilotoEscuderia p){
         this.pilotosEscuderias.add(p);
     }

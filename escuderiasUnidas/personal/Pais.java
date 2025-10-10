@@ -1,19 +1,26 @@
 package escuderiasUnidas.personal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pais {
     private int idPais;
     private String descripcion;
+    private List<Persona>personas;
 
-    public Pais(int idPais, String descripcion){
+    public Pais(){
+        this.personas= new ArrayList<Persona>();
+    }
+
+    public Pais(int idPais, String descripcion, List<Persona>personas){
         this.idPais= idPais;
         this.descripcion= descripcion;
-
+        this.personas = personas;
+    }
+    public void agregarPersona(Persona p){
+        this.personas.add(p);
     }
 
-    public Pais() {
-       this.idPais= 0;
-       this.descripcion="";
-    }
 
     public void setIdPais(int idPais) {
         this.idPais = idPais;

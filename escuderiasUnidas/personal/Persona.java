@@ -6,10 +6,11 @@ public class Persona {
     private String apellido;
     private Pais pais;
 
-    public Persona (String dni, String nombre, String apellido ){
+    public Persona (String dni, String nombre, String apellido, Pais pais){
         this.dni= dni;
         this.nombre=apellido;
         this.apellido= apellido;
+        this.pais = this.pais;
     }
 
     public Persona (){
