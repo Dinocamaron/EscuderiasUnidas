@@ -16,5 +16,34 @@ public class PilotoEscuderia {
         this.escuderia = escuderia;
     }
 
+    public void setDesdeFecha(String desdefecha){
+        this.desdeFecha=desdefecha;
+    }
+    public void setHastaFecha(String hastafecha){
+        this.hastaFecha=hastafecha;
+    }
+    public void setPiloto(Piloto piloto){
+        this.piloto=piloto;
+    }
+    public void setEscuderia(Escuderia escuderia){
+        this.escuderia=escuderia;
+    }
+
+    public String getDesdeFecha(){
+        return desdeFecha;
+    }
+    public String getHastaFecha(){
+        return hastaFecha;
+    }
+    public Piloto getPiloto(){
+        return piloto;
+    }
+    public Escuderia getEscuderia(){
+        return escuderia;
+    }
+
+    public void MostrarPilotoEscuderia(){
+        System.out.println("El Piloto " +piloto+ " pertenece a la Escuderia "+escuderia+ " desde "+desdeFecha+ " hasta "+hastaFecha); 
+    }
 
 }

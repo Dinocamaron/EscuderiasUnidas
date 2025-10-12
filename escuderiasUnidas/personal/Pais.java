@@ -1,5 +1,6 @@
 package escuderiasUnidas.personal;
 
+import escuderiasUnidas.carreras.Escuderia;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ public class Pais {
     private int idPais;
     private String descripcion;
     private List<Persona>personas;
+    private List<Escuderia> escuderias;
 
     public Pais(){
         this.personas= new ArrayList<Persona>();
