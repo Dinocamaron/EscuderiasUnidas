@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[]args){
-        Scanner sc= new Scanner(System.in);
+       Scanner sc = new Scanner(System.in);
         int opcion;
 
         do {
@@ -27,7 +27,7 @@ public class Main {
                 paraMostrarCosas();
                 break;
                 default :
-                System.out.println("Opcion invalida.")
+                System.out.println("Opcion invalida.");
         } 
         
         } while(opcion != 0);
@@ -57,7 +57,7 @@ public class Main {
         } while (op != 0);
     }
 
-    public void RegistrarPiloto(){
+    public static void RegistrarPiloto(Scanner sc){
         System.out.println("Ingrese DNI: ");
         String dni = sc.nextLine();
         System.out.println("Ingrese Nombre: ");
