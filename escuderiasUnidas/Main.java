@@ -1,15 +1,11 @@
 package escuderiasUnidas;
-import java.util.*;
-import escuderiasUnidas.carreras.*;
-import escuderiasUnidas.personal.*;
-import java.util.Scanner;
 
-public class Main {
-    public static void main(String[]args){
+/*public class Main {
+   // public static void main(String[]args){
        Scanner sc = new Scanner(System.in);
         int opcion;
 
-        do {
+     /*   do {
         System.out.println("0 - Salir.");
         System.out.println("1 - Registrar (Pilotos, Carreras, Escuderias, etc)");
         System.out.println("2 - Mostrar (Puntos, Podios, informes, etc)");
@@ -32,8 +28,10 @@ public class Main {
         
         } while(opcion != 0);
 
-        sc.close();
+
     }
+
+
 
     public static void paraRegistro(Scanner sc){
         int op;
@@ -51,6 +49,8 @@ public class Main {
             switch(op) {
                 case 1 : 
                 RegistrarPiloto();
+                case 2 :
+                    RegistrarAuto(Scanner sc);
                 break;
             }
 
@@ -58,13 +58,30 @@ public class Main {
     }
 
     public static void RegistrarPiloto(Scanner sc){
-        System.out.println("Ingrese DNI: ");
-        String dni = sc.nextLine();
-        System.out.println("Ingrese Nombre: ");
-        String nombre = sc.nextLine();
-        System.out.println("Ingrese Apellido : ");
-        String apellido = sc.nextLine();
-        
+        do {
+            System.out.println("Ingrese DNI: ");
+            String dni = sc.nextLine();
+            System.out.println("Ingrese Nombre: ");
+            String nombre = sc.nextLine();
+            System.out.println("Ingrese Apellido : ");
+            String apellido = sc.nextLine();
+
+            Persona a = new Piloto(dni, nombre, apellido);
+
+        }while(sc.nextLine().isEmpty());
+        }
+    }
+    public static void RegistrarAuto(Scanner sc) {
+        do {
+            System.out.println("Modelo: ");
+            String modelo = sc.nextLine();
+            System.out.println("Motor: ");
+            String motor = sc.nextLine();
+        }while(!sc.nextLine().isEmpty());
     }
 
 }
+
+ */
+
+

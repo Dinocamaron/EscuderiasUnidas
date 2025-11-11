@@ -1,7 +1,5 @@
 package escuderiasUnidas;
 
-import escuderiasUnidas.carreras.Auto;
-import escuderiasUnidas.personal.Piloto;
 
 public class AutoPiloto {
     private String fechaAsignacion;

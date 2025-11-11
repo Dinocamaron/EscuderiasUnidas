@@ -1,7 +1,7 @@
-package escuderiasUnidas.carreras;
+package escuderiasUnidas;
 
+import escuderiasUnidas.Mecanico;
 import escuderiasUnidas.PilotoEscuderia;
-import escuderiasUnidas.personal.Mecanico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ public class Escuderia {
     private String nombre;
     private List<PilotoEscuderia> pilotosEscuderias;
     private List<Mecanico>mecanicos;
+    private List<Auto>autos;
 
     public Escuderia(){
         this.pilotosEscuderias = new ArrayList<PilotoEscuderia>();
@@ -19,6 +20,7 @@ public class Escuderia {
     public Escuderia(String nombre){
         this.nombre=nombre;
         this.pilotosEscuderias = new ArrayList<PilotoEscuderia>();
+        this.autos = new ArrayList<Auto>();
     }
     public Escuderia(String nombre,List<PilotoEscuderia> pilotosEscuderias,List<Mecanico>mecanicos){
         this.nombre=nombre;
@@ -26,11 +28,23 @@ public class Escuderia {
         this.mecanicos= mecanicos;
     }
 
-    public void agregarMecanico(Mecanico m){
-        this.mecanicos.add(m);
+
+    public void agregarPilotoEsc(PilotoEscuderia p) {
+        if (p.getEscuderia() != null) {
+            throw new IllegalArgumentException("Piloto ya pertenece a otra escudería.");
+        }
+        pilotosEscuderias.add(p);
+        p.setEscuderia(this);
     }
-    public void agregarPilotoEsc(PilotoEscuderia p){
-        this.pilotosEscuderias.add(p);
+
+    public void agregarAuto(Auto a) {
+        autos.add(a);
+        a.setEscuderia(this);
+    }
+    // Asignar mecánico
+    public void agregarMecanico(Mecanico m) {
+        mecanicos.add(m);
+        m.setEscuderia(this);
     }
 
     public void setPilotosEscuderias(List<PilotoEscuderia> pilotosEscuderias) {

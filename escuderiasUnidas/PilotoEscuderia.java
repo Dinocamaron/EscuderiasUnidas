@@ -1,15 +1,15 @@
 package escuderiasUnidas;
 
-import escuderiasUnidas.carreras.Escuderia;
-import escuderiasUnidas.personal.Piloto;
 
 public class PilotoEscuderia {
     private String desdeFecha;
     private String hastaFecha;
     private Piloto piloto;
     private Escuderia escuderia;
+    private int puntos;
 
-    public PilotoEscuderia(String desdeFecha, String hastaFecha, Piloto piloto, Escuderia escuderia) {
+    public PilotoEscuderia( String desdeFecha, String hastaFecha, Piloto piloto, Escuderia escuderia) {
+
         this.desdeFecha = desdeFecha;
         this.hastaFecha = hastaFecha;
         this.piloto = piloto;
@@ -46,4 +46,18 @@ public class PilotoEscuderia {
         System.out.println("El Piloto " +piloto+ " pertenece a la Escuderia "+escuderia+ " desde "+desdeFecha+ " hasta "+hastaFecha); 
     }
 
+  /*  public void agregarPuntos(int posicion) {
+        int[] puntuacion = {25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
+        if (posicion >= 1 && posicion <= 10) {
+           piloto.setPuntos(puntuacion[posicion - 1]);
+            if (posicion == 1) {
+                piloto.setVictorias(+1);
+            }
+            if (posicion <= 3) {
+                piloto.setPodio(+1);
+            }
+        }
+    }
+
+   */
 }

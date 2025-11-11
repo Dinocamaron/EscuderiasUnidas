@@ -1,4 +1,4 @@
-package escuderiasUnidas.personal;
+package escuderiasUnidas;
 
 public class Persona {
     private String dni;
@@ -42,5 +42,7 @@ public class Persona {
     public String getApellido() {
         return apellido;
     }
+
+
 }
 

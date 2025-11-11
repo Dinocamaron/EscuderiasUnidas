@@ -1,6 +1,5 @@
-package escuderiasUnidas.personal;
+package escuderiasUnidas;
 
-import escuderiasUnidas.carreras.Escuderia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +21,17 @@ public class Mecanico extends Persona{
         this.añosExperiencia=añosExperiencia;
         this.escuderias=escuderias;
     }
+
+    public Mecanico(String dni, String nombre, String apellido, Pais pais, int añosExperiencia, Especialidad especialidad) {
+        super(dni, nombre, apellido, pais);
+        this.especialidad=especialidad;
+        this.añosExperiencia=añosExperiencia;
+    }
+
     public void agregarEscuderia(Escuderia e){
         this.escuderias.add(e);
+    }
+    public void setEscuderia(Escuderia escuderia) {
     }
 
 }
