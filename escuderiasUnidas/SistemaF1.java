@@ -1,10 +1,13 @@
 package escuderiasUnidas;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class SistemaF1 {
+import static java.util.Collections.*;
+
+public class SistemaF1  {
     private List<Piloto> pilotos;
     private List<Escuderia> escuderias;
     private List<Auto> autos;
@@ -15,7 +18,7 @@ public class SistemaF1 {
     private List<PilotoEscuderia> pilotoEscuderias;
 
     public SistemaF1() {
-        this.pilotos = new ArrayList<>();
+        this.pilotos = new ArrayList<Piloto>();
         this.escuderias = new ArrayList<>();
         this.autos = new ArrayList<>();
         this.mecanicos = new ArrayList<>();
@@ -25,8 +28,14 @@ public class SistemaF1 {
     }
 
     // Métodos de registro
-    public void registrarPiloto(String dni, String nombre, String apellido, Pais pais) {
-        Piloto p = new Piloto(dni, nombre, apellido, pais);
+    public void registrarPiloto(String dni, String nombre, String apellido, int idPais) {
+        Pais P = null;
+        for (Pais p: paises){
+            if(p.getIdPais()== idPais){
+                P = p;
+            }
+        }
+        Piloto p = new Piloto(dni, nombre, apellido, P);
         pilotos.add(p);
         System.out.println("Piloto registrado: " + nombre);
     }
@@ -37,14 +46,29 @@ public class SistemaF1 {
         System.out.println("Escudería registrada: " + nombre);
     }
 
-    public void registrarAuto(String modelo, String motor, Escuderia escuderia) {
-        Auto a = new Auto(modelo, motor, escuderia);
-        autos.add(a);
+    public void registrarAuto(String modelo, String motor, String escu) {
+        Auto a = autos.stream().filter(au -> au.getModelo().equals(modelo)).findFirst().orElse(null);
+        Escuderia e = escuderias.stream().filter(es -> es.getNombre().equals(escu)).findFirst().orElse(null);
+        if (a != null && e != null) {
+            Auto A = new Auto(modelo, motor, e);
+            autos.add(a);
+            e.agregarAuto(A);
+            System.out.println("Auto asignado a escudería.");
+        } else {
+            System.out.println("Auto o escudería no encontrados.");
+        }
+
         System.out.println("Auto registrado: " + modelo);
     }
 
-    public void registrarMecanico(String dni, String nombre, String apellido, Pais pais, int añosExperiencia, Especialidad especialidad) {
-        Mecanico m = new Mecanico(dni, nombre, apellido, pais, añosExperiencia, especialidad);
+    public void registrarMecanico(String dni, String nombre, String apellido, int idpais, int añosExperiencia, Especialidad especialidad) {
+        Pais P = null;
+        for (Pais p: paises){
+            if(p.getIdPais()== idpais){
+                P = p;
+            }
+        }
+        Mecanico m = new Mecanico(dni, nombre, apellido, P, añosExperiencia, especialidad);
         mecanicos.add(m);
         System.out.println("Mecánico registrado: " + nombre);
     }
@@ -55,16 +79,15 @@ public class SistemaF1 {
         System.out.println("País registrado: " + idPais);
     }
 
-    public void registrarCircuito(String nombre, int longitud, String idPais) {
-        Pais p = null;
-        for (Pais pa : paises) {
-            if ((idPais).equals(p.getIdPais())) {
-                p = pa;
-                break;
+    public void registrarCircuito(String nombre, int longitud, int idPais) {
+        Pais P = null;
+        for (Pais p: paises){
+            if(p.getIdPais()== idPais){
+                P = p;
             }
         }
-        if (p != null) {
-            Circuito c = new Circuito(nombre, longitud, p);
+        if (P != null) {
+            Circuito c = new Circuito(nombre, longitud, P);
             circuitos.add(c);
             System.out.println("Circuito registrado: " + nombre);
         } else {
@@ -87,7 +110,7 @@ public class SistemaF1 {
         }
     }
 
-    public void asignarAutoAEscuderia(String modeloAuto, String nombreEscuderia) {
+   /* public void asignarAutoAEscuderia(String modeloAuto, String nombreEscuderia) {
         Auto a = autos.stream().filter(au -> au.getModelo().equals(modeloAuto)).findFirst().orElse(null);
         Escuderia e = escuderias.stream().filter(es -> es.getNombre().equals(nombreEscuderia)).findFirst().orElse(null);
         if (a != null && e != null) {
@@ -98,15 +121,17 @@ public class SistemaF1 {
         }
     }
 
+    */
+
     // Planificar carrera
     public void crearCarrera(Date fecha, int numeroVueltas, String hora, String nombreCircuito) {
-        Circuito c = circuitos.stream().filter(ci -> ci.getNombre().equals(nombreCircuito)).findFirst().orElse(null);
-        if (c != null) {
-            Carrera ca = new Carrera(fecha, numeroVueltas, hora, c);
-            carreras.add(ca);
-            System.out.println("Carrera creada en " + nombreCircuito + " a las " + hora);
-        } else {
-            System.out.println("Circuito no encontrado.");
+        for (Circuito c : circuitos) {
+            if (c.getNombre().equals(nombreCircuito)) {
+                Carrera ca = new Carrera(fecha, numeroVueltas, hora, c);
+                carreras.add(ca);
+            } else {
+                System.out.println("Circuito no encontrado.");
+            }
         }
     }
 
@@ -130,16 +155,19 @@ public class SistemaF1 {
             if (!(c.getFechaRealizacion().before(inicio) && !c.getFechaRealizacion().after(fin))) {
                 System.out.println("Carrera en " + c.getCircuito().getNombre() + " - " + c.getFechaRealizacion() + " " + c.getHoraRealizacion());
                 for (Participacion part : c.getParticipaciones()) {
-                    System.out.println(part.getPiloto().getNombre() + " - Pos: " + part.getPosicion() + " - Vuelta Rápida: " + part.isVueltaRapida());
+                    System.out.println(part.getPilotoP().getPiloto().getNombre() + " - Pos: " + part.getPosicion() + " - Vuelta Rápida: " + part.isVueltaRapida());
                 }
             }
         }
-        public void rankingPilotos(){
-            pilotos.sort((p1, p2) -> Integer.compare(p2.getPuntos(), p1.getPuntos()));
-            System.out.println("Ranking de Pilotos por Puntos:");
-            for (Piloto p : pilotos) {
-                System.out.println(p.getNombre() + " - Puntos: " + p.getPuntos());
-            }
+
+        }
+
+    public void RankingPilotos() {
+        System.out.println("Ranking de Pilotos por Puntos:");
+        Collections.sort(pilotos);
+        for (Piloto p : pilotos) {
+            System.out.println(p.getNombre() + " - Puntos: " + p.getPuntos());
         }
     }
 }
+

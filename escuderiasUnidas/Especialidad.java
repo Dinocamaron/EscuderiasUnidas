@@ -1,3 +1,9 @@
 package escuderiasUnidas;
 
-public enum Especialidad {MOTOR, NEUMATICOS, CHASIS, ELECTRONICA }
+public enum Especialidad {
+
+          MOTOR, NEUMATICOS, CHASIS, ELECTRONICA;
+
+    }
+
+

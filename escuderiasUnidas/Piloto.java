@@ -1,8 +1,9 @@
 package escuderiasUnidas;
 
+import java.util.Collections;
 import java.util.List;
 
-public class Piloto extends Persona {
+public class Piloto extends Persona implements Comparable<Piloto> {
 
     private int numeroCompetencia;
     private int victorias;
@@ -109,6 +110,11 @@ public class Piloto extends Persona {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
+   /* public Piloto getEscuderiaP(){
+        for (pilotosEscuderias pe : Piloto)
+        return }
+
+    */
 
     public List<AutoPiloto> getPilotosAutos() {
         return pilotosAutos;
@@ -125,4 +131,10 @@ public class Piloto extends Persona {
         }
     }
 
+public int compareTo(Piloto p){
+    return Double.compare(p.puntos, this.puntos);
 }
+
+}
+
+

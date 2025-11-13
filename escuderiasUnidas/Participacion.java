@@ -16,7 +16,7 @@ public class Participacion {
         }
     }
 
-    public Piloto getPiloto() {
+    public PilotoEscuderia getPilotoP() {
         return piloto;
     }
 
