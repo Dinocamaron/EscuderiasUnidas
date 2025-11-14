@@ -1,6 +1,7 @@
 package escuderiasUnidas;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Auto {
@@ -25,10 +26,24 @@ public class Auto {
         this.pilotosAutos = pilotosAutos;
         asignado = false;
     }
+    //Metodo Para Asignar un auto  un piloto y carrera especfica, con validacion
+    public void asignarAutoPiloto(Piloto piloto, Carrera carrera, Date fecha) {
 
-    public void agregarPilotosA(AutoPiloto a){
-        this.pilotosAutos.add(a);
+        for (AutoPiloto ap : pilotosAutos) {
+            if (ap.getPiloto().equals(piloto) && ap.getCarrera().equals(carrera)) {
+                throw new IllegalArgumentException("Piloto ya asignado a un auto en esta carrera.");
+            }
+        }
+        for (AutoPiloto ap : pilotosAutos) {
+            if (ap.getAuto().equals(this) && ap.getCarrera().equals(carrera) && !ap.getPiloto().equals(piloto)) {
+                throw new IllegalArgumentException("Auto ya asignado a otro piloto en esta carrera.");
+            }
+        }
+        AutoPiloto ap = new AutoPiloto(fecha, piloto,this, carrera);
+        pilotosAutos.add(ap);
     }
+
+
 
     public void setPilotosAutos(List<AutoPiloto> pilotosAutos) {
         this.pilotosAutos = pilotosAutos;
@@ -57,3 +72,4 @@ public class Auto {
 
     public Object getEscuderia() {return  escuderia;}
 }
+

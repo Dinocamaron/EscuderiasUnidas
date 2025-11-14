@@ -10,6 +10,7 @@ public class Carrera {
     private String horaRealizacion;
     private Circuito circuito;
     private List<Participacion> participaciones;
+    private List<AutoPiloto>pilotosAutos;
 
 
     public Carrera (Date fechaRealizacion, int numeroVueltas, String horaRealizacion, Circuito circuito){
@@ -18,12 +19,15 @@ public class Carrera {
         this.horaRealizacion= horaRealizacion;
         this.circuito = circuito;
         this.participaciones = new ArrayList<Participacion>();
+        this.pilotosAutos = new ArrayList<AutoPiloto>();
     }
     public Carrera(){
         this.numeroVueltas=0;
         this.horaRealizacion="";
     }
     public List<Participacion> getParticipaciones() { return participaciones; }
+
+
 
     // Registrar participación con validaciones (auto no asignado, misma escudería)
     public void registrarParticipacion(PilotoEscuderia piloto, Auto auto, int posicion, boolean vueltaRapida) {
@@ -38,7 +42,6 @@ public class Carrera {
         auto.setAsignado(true);
         piloto.getPiloto().agregarPuntos(posicion);
     }
-
     public void setFechaRealizacion(Date fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
@@ -73,4 +76,5 @@ public class Carrera {
     public void setParticipaciones(List<Participacion> participaciones) {
         this.participaciones = participaciones;
     }
-}
+            }
+

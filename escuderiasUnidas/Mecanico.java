@@ -34,4 +34,33 @@ public class Mecanico extends Persona{
     public void setEscuderia(Escuderia escuderia) {
     }
 
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public int getAñosExperiencia() {
+        return añosExperiencia;
+    }
+
+    public void setAñosExperiencia(int añosExperiencia) {
+        this.añosExperiencia = añosExperiencia;
+    }
+
+    public List<Escuderia> getEscuderias() {
+        return escuderias;
+    }
+
+    public void setEscuderias(List<Escuderia> escuderias) {
+        this.escuderias = escuderias;
+    }
+
+    @Override
+    public String toString(){
+        return "Mecanico: " + getNombre() + " " + getApellido() + " " + "Especialidad: " + getEspecialidad() + "Años de Experiencia: " + getAñosExperiencia();
+    }
+
 }

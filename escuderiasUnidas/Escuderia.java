@@ -4,6 +4,7 @@ import escuderiasUnidas.Mecanico;
 import escuderiasUnidas.PilotoEscuderia;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Escuderia {
@@ -27,14 +28,14 @@ public class Escuderia {
         this.pilotosEscuderias = pilotosEscuderias;
         this.mecanicos= mecanicos;
     }
-
-
-    public void agregarPilotoEsc(PilotoEscuderia p) {
-        if (p.getEscuderia() != null) {
-            throw new IllegalArgumentException("Piloto ya pertenece a otra escudería.");
+    public void asignarPiloto(Piloto piloto, Date fechaInicio, Date fechaFin) {
+        for (PilotoEscuderia pe : pilotosEscuderias) {
+            if (pe.getPiloto().equals(piloto) && pe.estaActivo(fechaInicio)) {
+                throw new IllegalArgumentException("Piloto ya asignado a esta escudería en este período.");
+            }
         }
-        pilotosEscuderias.add(p);
-        p.setEscuderia(this);
+        PilotoEscuderia pe = new PilotoEscuderia(fechaInicio, fechaFin,piloto , this);
+        pilotosEscuderias.add(pe);
     }
 
     public void agregarAuto(Auto a) {
@@ -62,4 +63,21 @@ public class Escuderia {
     public String getNombre() {
         return nombre;
     }
+
+    public List<Mecanico> getMecanicos() {
+        return mecanicos;
+    }
+
+    public void setMecanicos(List<Mecanico> mecanicos) {
+        this.mecanicos = mecanicos;
+    }
+
+    public List<Auto> getAutos() {
+        return autos;
+    }
+
+    public void setAutos(List<Auto> autos) {
+        this.autos = autos;
+    }
 }
+

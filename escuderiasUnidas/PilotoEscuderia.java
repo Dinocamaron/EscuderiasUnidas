@@ -1,14 +1,15 @@
 package escuderiasUnidas;
 
 
+import java.util.Date;
+
 public class PilotoEscuderia {
-    private String desdeFecha;
-    private String hastaFecha;
+    private Date desdeFecha;
+    private Date hastaFecha;
     private Piloto piloto;
     private Escuderia escuderia;
-    private int puntos;
 
-    public PilotoEscuderia( String desdeFecha, String hastaFecha, Piloto piloto, Escuderia escuderia) {
+    public PilotoEscuderia( Date desdeFecha, Date hastaFecha, Piloto piloto, Escuderia escuderia) {
 
         this.desdeFecha = desdeFecha;
         this.hastaFecha = hastaFecha;
@@ -16,10 +17,10 @@ public class PilotoEscuderia {
         this.escuderia = escuderia;
     }
 
-    public void setDesdeFecha(String desdefecha){
+    public void setDesdeFecha(Date desdefecha){
         this.desdeFecha=desdefecha;
     }
-    public void setHastaFecha(String hastafecha){
+    public void setHastaFecha(Date hastafecha){
         this.hastaFecha=hastafecha;
     }
     public void setPiloto(Piloto piloto){
@@ -29,10 +30,10 @@ public class PilotoEscuderia {
         this.escuderia=escuderia;
     }
 
-    public String getDesdeFecha(){
+    public Date getDesdeFecha(){
         return desdeFecha;
     }
-    public String getHastaFecha(){
+    public Date getHastaFecha(){
         return hastaFecha;
     }
     public Piloto getPiloto(){
@@ -47,18 +48,8 @@ public class PilotoEscuderia {
     }
 
 
-  /*  public void agregarPuntos(int posicion) {
-        int[] puntuacion = {25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
-        if (posicion >= 1 && posicion <= 10) {
-           piloto.setPuntos(puntuacion[posicion - 1]);
-            if (posicion == 1) {
-                piloto.setVictorias(+1);
-            }
-            if (posicion <= 3) {
-                piloto.setPodio(+1);
-            }
-        }
+    public boolean estaActivo(Date fecha) {
+        return fecha.after(desdeFecha) && (hastaFecha == null || fecha.before(hastaFecha));
+    }
     }
 
-   */
-}

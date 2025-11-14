@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.Collections.*;
 
-public class SistemaF1  {
+public class SistemaF1 {
     private List<Piloto> pilotos;
     private List<Escuderia> escuderias;
     private List<Auto> autos;
@@ -30,8 +30,8 @@ public class SistemaF1  {
     // Métodos de registro
     public void registrarPiloto(String dni, String nombre, String apellido, int idPais) {
         Pais P = null;
-        for (Pais p: paises){
-            if(p.getIdPais()== idPais){
+        for (Pais p : paises) {
+            if (p.getIdPais() == idPais) {
                 P = p;
             }
         }
@@ -63,8 +63,8 @@ public class SistemaF1  {
 
     public void registrarMecanico(String dni, String nombre, String apellido, int idpais, int añosExperiencia, Especialidad especialidad) {
         Pais P = null;
-        for (Pais p: paises){
-            if(p.getIdPais()== idpais){
+        for (Pais p : paises) {
+            if (p.getIdPais() == idpais) {
                 P = p;
             }
         }
@@ -81,8 +81,8 @@ public class SistemaF1  {
 
     public void registrarCircuito(String nombre, int longitud, int idPais) {
         Pais P = null;
-        for (Pais p: paises){
-            if(p.getIdPais()== idPais){
+        for (Pais p : paises) {
+            if (p.getIdPais() == idPais) {
                 P = p;
             }
         }
@@ -94,44 +94,46 @@ public class SistemaF1  {
             System.out.println("País no encontrado.");
         }
     }
+    // Asignacion de Piloto a Escuderia con validaciones
 
-    // Asignaciones con validaciones
-    public void asignarPilotoAEscuderia(String desdeFecha, String hastaFecha, String nombrePiloto, String nombreEscuderia) {
-        Piloto p = pilotos.stream().filter(pi -> pi.getNombre().equals(nombrePiloto)).findFirst().orElse(null);
-        Escuderia e = escuderias.stream().filter(es -> es.getNombre().equals(nombreEscuderia)).findFirst().orElse(null);
+    public void asignarPilotoAEscuderia(String nombrePiloto, String nombreEscuderia, Date fechaInicio, Date fechaFin) {
+        Piloto p = null;
+        for (Piloto pi : pilotos) {
+            if (pi.getNombre().equals(nombrePiloto)) {
+                p = pi;
+                break;
+            }
+        }
+        Escuderia e = null;
+        for (Escuderia es : escuderias) {
+            if (es.getNombre().equals(nombreEscuderia)) {
+                e = es;
+                break;
+            }
+        }
         if (p != null && e != null) {
-            PilotoEscuderia pe = new PilotoEscuderia(desdeFecha, hastaFecha, p, e);
-
-            p.agregarPilotoEsc(pe);
-            e.agregarPilotoEsc(pe);
+            e.asignarPiloto(p, fechaInicio, fechaFin);
             System.out.println("Piloto asignado a escudería.");
         } else {
             System.out.println("Piloto o escudería no encontrados.");
         }
     }
 
-   /* public void asignarAutoAEscuderia(String modeloAuto, String nombreEscuderia) {
-        Auto a = autos.stream().filter(au -> au.getModelo().equals(modeloAuto)).findFirst().orElse(null);
-        Escuderia e = escuderias.stream().filter(es -> es.getNombre().equals(nombreEscuderia)).findFirst().orElse(null);
-        if (a != null && e != null) {
-            e.agregarAuto(a);
-            System.out.println("Auto asignado a escudería.");
-        } else {
-            System.out.println("Auto o escudería no encontrados.");
-        }
-    }
-
-    */
-
     // Planificar carrera
     public void crearCarrera(Date fecha, int numeroVueltas, String hora, String nombreCircuito) {
-        for (Circuito c : circuitos) {
-            if (c.getNombre().equals(nombreCircuito)) {
-                Carrera ca = new Carrera(fecha, numeroVueltas, hora, c);
-                carreras.add(ca);
-            } else {
-                System.out.println("Circuito no encontrado.");
+        Circuito c = null;
+        for (Circuito ci : circuitos) {
+            if (ci.getNombre().equals(nombreCircuito)) {
+                c = ci;
+                break;
             }
+        }
+        if (c != null) {
+            Carrera ca = new Carrera(fecha, numeroVueltas, hora, c);
+            carreras.add(ca);
+            System.out.println("Carrera creada en " + nombreCircuito + " a las " + hora);
+        } else {
+            System.out.println("Circuito no encontrado.");
         }
     }
 
@@ -149,6 +151,23 @@ public class SistemaF1  {
     }
 
     // Informes
+    public void carrerasEnCircuito(String nombreCircuito) {
+        int veces = (int) carreras.stream().filter(c -> c.getCircuito().getNombre().equals(nombreCircuito)).count();
+        System.out.println("Carreras en " + nombreCircuito + ": " + veces);
+    }
+
+    public void vecesPilotoEnCircuito(String nombrePiloto, String nombreCircuito) {
+        int veces = 0;
+        for (Carrera c : carreras) {
+            if (c.getCircuito().getNombre().equals(nombreCircuito)) {
+                for (Participacion part : c.getParticipaciones()) {
+                    if (part.getPiloto().getNombre().equals(nombrePiloto)) veces++;
+                }
+            }
+        }
+        System.out.println(nombrePiloto + " corrió " + veces + " veces en " + nombreCircuito);
+    }
+
     public void resultadosDetalladosPorRango(Date inicio, Date fin) {
         System.out.println("Resultados detallados entre " + inicio + " y " + fin + ":");
         for (Carrera c : carreras) {
@@ -160,7 +179,7 @@ public class SistemaF1  {
             }
         }
 
-        }
+    }
 
     public void RankingPilotos() {
         System.out.println("Ranking de Pilotos por Puntos:");
@@ -169,5 +188,57 @@ public class SistemaF1  {
             System.out.println(p.getNombre() + " - Puntos: " + p.getPuntos());
         }
     }
+
+    public void experienciaEspecialidadMecanicos(String nombreEscuderia) {
+        Escuderia e = escuderias.stream().filter(es -> es.getNombre().equals(nombreEscuderia)).findFirst().orElse(null);
+        if (e != null) {
+            System.out.println("Mecánicos de " + nombreEscuderia + ":");
+            for (Mecanico m : e.getMecanicos()) {
+                System.out.println(m.getNombre() + " - Experiencia: " + m.getAñosExperiencia() + " años, Especialidad: " + m.getEspecialidad());
+            }
+        } else {
+            System.out.println("Escudería no encontrada.");
+        }
+    }
+
+    public void autosPorEscuderia(String nombreEscuderia) {
+        Escuderia e = escuderias.stream().filter(es -> es.getNombre().equals(nombreEscuderia)).findFirst().orElse(null);
+        if (e != null) {
+            System.out.println("Autos que a utilizado la Escuderia: " + nombreEscuderia + " en carreras:");
+            for (Auto a : e.getAutos()) {
+                System.out.println(a.getModelo());
+            }
+        } else {
+            System.out.println("Escudería no encontrada.");
+        }
+    }
+
+    public void historicoPodiosVictorias(String nombrePiloto) {
+        Piloto p = pilotos.stream().filter(pi -> pi.getNombre().equals(nombrePiloto)).findFirst().orElse(null);
+        if (p != null) {
+            System.out.println("Histórico de " + nombrePiloto + ": Victorias: " + p.getVictorias() + ", Podios: " + p.getPodio() + ", Poles: " + p.getPolePosition());
+        } else {
+            System.out.println("Piloto no encontrado.");
+        }
+    }
+
+
+    // Asignar auto a piloto en carrera
+    public void asignarAutoAPilotoEnCarrera(String nombrePiloto, String modeloAuto, String nombreCircuito, Date fechaCarrera) {
+        Piloto p = pilotos.stream().filter(piloto -> piloto.getNombre().equals(nombrePiloto)).findFirst().orElse(null);
+        Auto a = autos.stream().filter(auto -> auto.getModelo().equals(modeloAuto)).findFirst().orElse(null);
+        Carrera c = carreras.stream().filter(carrera -> carrera.getCircuito().equals(nombreCircuito)).findFirst().orElse(null);
+
+        if (p == null || a == null || c == null) {
+            System.out.println("Piloto, auto o carrera no encontrados.");
+            return;
+        }else {
+            AutoPiloto au = new AutoPiloto(fechaCarrera,p,a,c);
+        }
+
+
+    }
 }
+
+
 
